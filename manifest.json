@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Auto Radio Button Checker",
+    "description": "Check radio buttons when you enter the page you selected",
+    "version": "0.1",
+    "icons": {
+        "128": "icon.png"
+    },
+    "browser_action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "<all_urls>",
+        "storage",
+        "declarativeContent"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content_script.js"
+            ]
+        }
+    ]
+}
