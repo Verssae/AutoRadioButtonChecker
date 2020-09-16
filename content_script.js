@@ -1,18 +1,27 @@
 function init() {
-
-  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function (
+    request,
+    sender,
+    sendResponse
+  ) {
     console.log(
       sender.tab
         ? "from a content script:" + sender.tab.url
         : "from the extension"
     )
     if (request.greeting == "save") {
-        console.log("save snapshot")
-        sendResponse({ farewell: "save done" })
+      chrome.storage.local.get("url", ({ url }) => {
+        chrome.storage.local.set({ checks: findAllChecked(names) }, () =>
+          console.log(`url saved: ${url} : ${findAllChecked(names)}`)
+        )
+      })
+
+      console.log("save snapshot")
+      sendResponse({ farewell: "save done" })
     }
     if (request.greeting == "load") {
-        console.log(findAllChecked(names))
-        sendResponse({ farewell: "load done" })
+      console.log(findAllChecked(names))
+      sendResponse({ farewell: "load done" })
     }
   })
 
@@ -21,18 +30,13 @@ function init() {
   names = Array.from(new Set([...radios].map((radio) => radio.name)))
   console.log(names)
 
-//   chrome.runtime.sendMessage({ greeting: "names" }, function (response) {
-//     console.log("content")
-//     console.log(response)
-    
-//   })
-
+  chrome.storage.local.get("checks", (checks) => checkBy(names, checks))
 }
 
-function findAllChecked(nl) {
+function findAllChecked(names) {
   let checked_list = []
-  for (let i = 0; i < nl.length; i++) {
-    let buttons = Array.from(document.getElementsByName(nl[i]))
+  for (let i = 0; i < names.length; i++) {
+    let buttons = Array.from(document.getElementsByName(names[i]))
     for (let j = 0; j < buttons.length; j++) {
       if (buttons[j].checked) {
         checked_list.push(j)
@@ -40,6 +44,17 @@ function findAllChecked(nl) {
     }
   }
   return checked_list
+}
+
+function checkBy(names, {checks}) {
+  if (checks) {
+      console.log(checks)
+    for (let i = 0; i < names.length; i++) {
+      let buttons = Array.from(document.getElementsByName(names[i]))
+    //   console.log(buttons[checks[i]])
+      buttons[checks[i]].checked = true
+    }
+  }
 }
 
 init()
