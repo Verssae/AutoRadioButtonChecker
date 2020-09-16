@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removePair(url) {
     console.log(url)
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
       if (!pairs) {
         showTable()
         return
       }
-      chrome.storage.local.set(
+      chrome.storage.sync.set(
         {
           pairs: pairs.filter(pair => pair.url != url)
         },
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tr.appendChild(th2)
     tr.appendChild(th3)
     list.appendChild(tr)
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
       if (!pairs) {
         tbox.appendChild(list)
         return
