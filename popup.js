@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   save.addEventListener("click", function () {
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.storage.local.set({url: tabs[0].url}, ()=>console.log(`url saved: ${tabs[0].url}`))
       chrome.tabs.sendMessage(tabs[0].id, {greeting: "save"}, function(response) {
         console.log(response.farewell);
       });
