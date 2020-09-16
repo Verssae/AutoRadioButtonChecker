@@ -10,17 +10,11 @@ function init() {
         : "from the extension"
     )
     if (request.greeting == "save") {
-      chrome.storage.local.get("url", ({ url }) => {
-        chrome.storage.local.set({ checks: findAllChecked(names) }, () =>
-          console.log(`url saved: ${url} : ${findAllChecked(names)}`)
-        )
-      })
-
-      console.log("save snapshot")
+      savePair(names)
       sendResponse({ farewell: "save done" })
     }
     if (request.greeting == "load") {
-      console.log(findAllChecked(names))
+      showPairs()
       sendResponse({ farewell: "load done" })
     }
   })
@@ -30,7 +24,57 @@ function init() {
   names = Array.from(new Set([...radios].map((radio) => radio.name)))
   console.log(names)
 
-  chrome.storage.local.get("checks", (checks) => checkBy(names, checks))
+  //   chrome.storage.local.get("checks", ({ checks }) => checkBy(names, checks))
+}
+
+function savePair(names) {
+  chrome.storage.local.get("url", ({ url }) => {
+    console.log(url)
+    chrome.storage.local.get("pairs", ({ pairs }) => {
+      console.log(pairs)
+      if (pairs == undefined) {
+        pairs = []
+      }
+      let updated = false
+      pairs = pairs.map((pair) => {
+        if (pair.url == url) {
+          pair = {
+            url: url,
+            checks: findAllChecked(names),
+          }
+          updated = true
+        }
+        return pair
+      })
+      if (updated) {
+        chrome.storage.local.set({ pairs: pairs }, () =>
+          console.log("pairs updated")
+        )
+      } else {
+        chrome.storage.local.set(
+          {
+            pairs: [
+              ...pairs,
+              {
+                url: url,
+                checks: findAllChecked(names),
+              },
+            ],
+          },
+          () => console.log("pairs added")
+        )
+      }
+    })
+  })
+
+  console.log("save snapshot")
+  
+}
+
+function showPairs() {
+  chrome.storage.local.get("pairs", ({ pairs }) => {
+    console.log(pairs)
+  })
 }
 
 function findAllChecked(names) {
@@ -46,12 +90,12 @@ function findAllChecked(names) {
   return checked_list
 }
 
-function checkBy(names, {checks}) {
+function checkBy(names, checks) {
   if (checks) {
-      console.log(checks)
+    console.log(checks)
     for (let i = 0; i < names.length; i++) {
       let buttons = Array.from(document.getElementsByName(names[i]))
-    //   console.log(buttons[checks[i]])
+      //   console.log(buttons[checks[i]])
       buttons[checks[i]].checked = true
     }
   }
