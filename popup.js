@@ -1,50 +1,84 @@
 
 document.addEventListener("DOMContentLoaded", function () {
- 
+
   let save = document.getElementById("save")
   save.addEventListener("click", function () {
 
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {greeting: "save"}, function(response) {
-        console.log(response.farewell);
-      });
-    });
-    
-
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { greeting: "save" }, function (response) {
+        console.log(response.farewell)
+        showTable()
+      })
+    })
   })
 
-  let load = document.getElementById("load")
-  load.addEventListener("click", function () {
+  function removePair(url) {
+    console.log(url)
+    chrome.storage.local.get("pairs", ({ pairs }) => {
+      if (!pairs) {
+        showTable()
+        return
+      }
+      chrome.storage.local.set(
+        {
+          pairs: pairs.filter(pair => pair.url != url)
+        },
+        () => {
+          console.log("pair removed")
+          showTable()
+        }
+      )
+    })
+  }
 
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {greeting: "load"}, function(response) {
-        console.log(response.farewell);
-      });
-    });
-    
+  function showTable() {
+    let tbox = document.getElementById("tbox")
+    let table = document.getElementsByTagName("table")[0]
+    table.remove()
+    let list = document.createElement("table")
+    console.log(list)
+    let tr = document.createElement("tr")
+    let th1 = document.createElement("th")
+    let th2 = document.createElement("th")
+    let th3 = document.createElement("th")
+    th1.textContent = "URL"
+    th2.textContent = "CHECKS"
+    th3.textContent = "X"
+    tr.appendChild(th1)
+    tr.appendChild(th2)
+    tr.appendChild(th3)
+    list.appendChild(tr)
+    chrome.storage.local.get("pairs", ({ pairs }) => {
+      if (!pairs) {
+        tbox.appendChild(list)
+        return
+      }
+      pairs.forEach(({ url, checks }) => {
+        console.log(url)
+        let row = document.createElement("tr")
+        let td1 = document.createElement("td")
+        let td2 = document.createElement("td")
+        let td3 = document.createElement("td")
+        let rmbtn = document.createElement("button")
+        rmbtn.textContent = "X"
+        rmbtn.addEventListener("click", () => {
+          removePair(url)
+        })
+        td1.textContent = url
+        td2.textContent = checks
+        td3.appendChild(rmbtn)
+        row.appendChild(td1)
+        row.appendChild(td2)
+        row.appendChild(td3)
+        list.appendChild(row)
+      })
+      tbox.appendChild(list)
+    })
+  }
 
-  })
-  
-  chrome.runtime.onMessage.addListener(function (
-    request,
-    sender,
-    sendResponse
-  ) {
-    console.log(
-      sender.tab
-        ? "from a content script:" + sender.tab.url
-        : "from the extension"
-    )
-    if (request.greeting == "names") {
-      console.log(greeting)
-      sendResponse({ farewell: "ok" })
-    } 
-  })
+  showTable()
 
-  
 })
-// let names = []
-    // chrome.storage.sync.get("names", (items) => {
-    //   names = items
-    //   console.log(names)
-    // })
+
+
+

@@ -1,36 +1,22 @@
-function init() {
-    chrome.runtime.onMessage.addListener(function (
-        request,
-        sender,
-        sendResponse
-    ) {
-        console.log(
-            sender.tab
-                ? "from a content script:" + sender.tab.url
-                : "from the extension"
-        )
-        if (request.greeting == "save") {
-            savePair(names, current_url)
-            sendResponse({ farewell: "save done" })
-        }
-        if (request.greeting == "load") {
-            showPairs()
-            sendResponse({ farewell: "load done" })
-        }
-    })
+var current_url = `${location.origin}${location.pathname}`
 
+function getNames() {
     let names = []
     let radios = document.querySelectorAll("input[type=radio]")
     names = Array.from(new Set([...radios].map((radio) => radio.name)))
-    console.log(names)
-    let current_url = `${location.origin}${location.pathname}`
+    return names
+}
 
+function checkAll(names, current_url) {
     chrome.storage.local.get("pairs", ({ pairs }) => {
-        pairs.forEach(({url, checks})=> {
-            if (current_url == url) {
-                checkBy(names, checks)
-            }
-        })
+        if (pairs) {
+            pairs.forEach(({ url, checks }) => {
+                if (current_url == url) {
+                    checkBy(names, checks)
+                }
+            })
+        }
+
     })
 }
 
@@ -72,12 +58,6 @@ function savePair(names, url) {
     })
 }
 
-function showPairs() {
-    chrome.storage.local.get("pairs", ({ pairs }) => {
-        console.log(pairs)
-    })
-}
-
 function findAllChecked(names) {
     let checked_list = []
     for (let i = 0; i < names.length; i++) {
@@ -102,9 +82,25 @@ function checkBy(names, checks) {
     }
 }
 
-init()
 
-//   chrome.storage.sync.set({ names: names }, () => console.log("saved"))
-//   chrome.storage.sync.get("names", (items) => {
-//     console.log(items)
-//   })
+chrome.runtime.onMessage.addListener(function (
+    request,
+    sender,
+    sendResponse
+) {
+    console.log(
+        sender.tab
+            ? "from a content script:" + sender.tab.url
+            : "from the extension"
+    )
+    if (request.greeting == "save") {
+        savePair(getNames(), current_url)
+        sendResponse({ farewell: "save done" })
+    }
+})
+
+
+
+let timer = setInterval(()=>checkAll(getNames(), current_url), 100)
+setTimeout(() => clearInterval(timer), 100)
+

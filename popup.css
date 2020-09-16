@@ -1,0 +1,35 @@
+h1 {
+    text-align: center;
+    margin-top: 1em;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+}
+
+#save {
+    width: 100%;
+}
+
+button {
+    background-color: white;
+}
+
+#bbox {
+    margin: auto;
+    width: 40%;
+}
+
+#tbox {
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+body {
+    background-color: rgb(236, 229, 229);
+    min-width: 300px;
+}
