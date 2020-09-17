@@ -1,5 +1,5 @@
 # AutoRadioChecker
-This Chrome extension takes a snapshot of a page of radio buttons you have checked and automatically checks the buttons every time you access that page.
+This Chrome extension takes a snapshot of a page of radio buttons you have checked and automatically checks the buttons every time you access that page. This program is convenient for you when accessing a site where you have to check the radio buttons every time you visit.
 
 ## How to use
 1. Pin the AutoRadioChecker extension.
