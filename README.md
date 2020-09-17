@@ -12,5 +12,5 @@ This Chrome extension takes a snapshot of a page of radio buttons you have check
 7. If you have a page that you no longer want to automatically check, just hit the x button in the list.
 
 ## Todo
--[] Improving Look and Feel
--[] Deploying to chrome extension store
+- Improving Look and Feel
+- Deploying to chrome extension store
