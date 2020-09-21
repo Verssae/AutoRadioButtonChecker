@@ -1,3 +1,5 @@
+
+
 var current_url = `${location.origin}${location.pathname}`
 
 function getNames() {
@@ -11,7 +13,7 @@ function checkAll(names, current_url) {
     chrome.storage.sync.get("pairs", ({ pairs }) => {
         if (pairs) {
             pairs.forEach(({ url, checks }) => {
-                if (current_url == url) {
+                if ((current_url).includes(url)) {
                     checkBy(names, checks)
                 }
             })
@@ -28,7 +30,7 @@ function savePair(names, url) {
         }
         let updated = false
         pairs = pairs.map((pair) => {
-            if (pair.url == url) {
+            if ((pair.url).includes(url)) {
                 pair = {
                     url: url,
                     checks: findAllChecked(names),
@@ -73,10 +75,8 @@ function findAllChecked(names) {
 
 function checkBy(names, checks) {
     if (checks && checks.length == names.length) {
-        console.log(checks)
         for (let i = 0; i < names.length; i++) {
             let buttons = Array.from(document.getElementsByName(names[i]))
-            //   console.log(buttons[checks[i]])
             buttons[checks[i]].checked = true
         }
     }
@@ -88,19 +88,23 @@ chrome.runtime.onMessage.addListener(function (
     sender,
     sendResponse
 ) {
-    console.log(
-        sender.tab
-            ? "from a content script:" + sender.tab.url
-            : "from the extension"
-    )
+
     if (request.greeting == "save") {
+        console.log("Saving start")
         savePair(getNames(), current_url)
         sendResponse({ farewell: "save done" })
     }
+
 })
 
 
+let timer = setInterval(() => checkAll(getNames(), current_url), 100)
+setTimeout(() => clearInterval(timer), 2000)
+console.log("[AUTO RADIO BUTTON CHEKCER is activated]\n\n")
+console.log("Found radio buttons in this page:")
+console.log(getNames())
 
-let timer = setInterval(()=>checkAll(getNames(), current_url), 100)
-setTimeout(() => clearInterval(timer), 100)
+
+
+
 

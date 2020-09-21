@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Auto Radio Button Checker",
     "description": "takes a snapshot of a page you have checked to automatically checks the buttons you access that page.",
-    "version": "0.1",
+    "version": "0.11",
     "icons": {
         "128": "icon.png"
     },
