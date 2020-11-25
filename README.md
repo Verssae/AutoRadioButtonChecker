@@ -1,4 +1,5 @@
 # Auto Radio Button Checker
+[chrome webstore](https://chrome.google.com/webstore/detail/auto-radio-button-checker/phkflnpejpgehjgficbbikeclfcageic?hl=ko)
 This Chrome extension takes a snapshot of a page of radio buttons you have checked and automatically checks the buttons every time you access that page. This program is convenient for you when accessing a site where you have to check the radio buttons every time you visit.
 
 ## How to use
