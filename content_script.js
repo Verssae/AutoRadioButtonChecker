@@ -12,7 +12,7 @@ function getNames() {
 }
 
 function checkAll(names, current_url) {
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
         if (pairs) {
             pairs.forEach(({ url, checks }) => {
                 if ((current_url).includes(url)) {
@@ -26,7 +26,7 @@ function checkAll(names, current_url) {
 
 function savePair(names, url) {
     console.log(url)
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
         if (pairs == undefined) {
             pairs = []
         }
@@ -42,11 +42,11 @@ function savePair(names, url) {
             return pair
         })
         if (updated) {
-            chrome.storage.local.set({ pairs: pairs }, () =>
+            chrome.storage.sync.set({ pairs: pairs }, () =>
                 console.log("pairs updated")
             )
         } else {
-            chrome.storage.local.set(
+            chrome.storage.sync.set(
                 {
                     pairs: [
                         ...pairs,

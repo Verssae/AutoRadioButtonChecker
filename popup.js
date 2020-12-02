@@ -5,11 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("save")
   console.log(save)
   save.addEventListener("click", function () {
+    console.log("save clicked")
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, { greeting: "save" }, function (response) {
         console.log("responded")
-        // showTable()
-        window.location.reload()
+        showTable()
+        // window.location.reload()
       })
 
     })
@@ -17,19 +18,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removePair(url) {
 
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
       if (!pairs) {
         // showTable()
         window.location.reload()
         return
       }
-      chrome.storage.local.set(
+      chrome.storage.sync.set(
         {
           pairs: pairs.filter(pair => pair.url != url)
         },
         () => {
-          // showTable()
-          window.location.reload()
+          showTable()
+          // window.location.reload()
         }
       )
     })
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tr.appendChild(th2)
     tr.appendChild(th3)
     list.appendChild(tr)
-    chrome.storage.local.get("pairs", ({ pairs }) => {
+    chrome.storage.sync.get("pairs", ({ pairs }) => {
       if (!pairs) {
         tbox.appendChild(list)
         return
@@ -81,8 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
 
-  function localizeHtmlPage() {
-    //Localize by replacing __MSG_***__ meta tags
+  function syncizeHtmlPage() {
+    //syncize by replacing __MSG_***__ meta tags
     var objects = document.getElementsByTagName('html');
     for (var j = 0; j < objects.length; j++) {
       var obj = objects[j];
@@ -98,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  localizeHtmlPage();
+  syncizeHtmlPage();
   showTable()
 
 })
