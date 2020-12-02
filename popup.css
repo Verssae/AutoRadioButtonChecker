@@ -1,6 +1,20 @@
+body {
+    background-color: rgb(40, 174, 207);
+    min-width: 300px;
+    margin: 0px;
+    padding: 5px;
+    border: 3px solid black;
+}
+
 h1 {
     text-align: center;
-    margin-top: 1em;
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+}
+
+h2 {
+    margin-bottom: 3px;
 }
 
 table, td, th {
@@ -8,8 +22,12 @@ table, td, th {
     border-collapse: collapse;
 }
 
+button:hover {
+    background-color: aqua;
+}
 
-#save {
+
+#bbox > button {
     width: 100%;
     border: 3px solid black;
     border-radius: 30px;
@@ -31,10 +49,17 @@ button {
     background-color: #fff;
 }
 
-body {
-    background-color: rgb(40, 174, 207);
-    min-width: 300px;
-    margin: 0px;
-    padding: 5px;
+ol {
     border: 3px solid black;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    background-color: #fff;
+}
+
+ol > li {
+    font-weight: bold;
+}
+
+footer {
+    text-align: right;
 }

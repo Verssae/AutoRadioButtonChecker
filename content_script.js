@@ -1,5 +1,7 @@
 
 
+
+
 var current_url = `${location.origin}${location.pathname}`
 
 function getNames() {
@@ -10,7 +12,7 @@ function getNames() {
 }
 
 function checkAll(names, current_url) {
-    chrome.storage.sync.get("pairs", ({ pairs }) => {
+    chrome.storage.local.get("pairs", ({ pairs }) => {
         if (pairs) {
             pairs.forEach(({ url, checks }) => {
                 if ((current_url).includes(url)) {
@@ -24,7 +26,7 @@ function checkAll(names, current_url) {
 
 function savePair(names, url) {
     console.log(url)
-    chrome.storage.sync.get("pairs", ({ pairs }) => {
+    chrome.storage.local.get("pairs", ({ pairs }) => {
         if (pairs == undefined) {
             pairs = []
         }
@@ -40,11 +42,11 @@ function savePair(names, url) {
             return pair
         })
         if (updated) {
-            chrome.storage.sync.set({ pairs: pairs }, () =>
+            chrome.storage.local.set({ pairs: pairs }, () =>
                 console.log("pairs updated")
             )
         } else {
-            chrome.storage.sync.set(
+            chrome.storage.local.set(
                 {
                     pairs: [
                         ...pairs,

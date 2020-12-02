@@ -1,8 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Auto Radio Button Checker",
-    "description": "takes a snapshot of a page you have checked to automatically checks the buttons you access that page.",
-    "version": "0.11",
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "version": "0.2",
     "icons": {
         "128": "icon.png"
     },

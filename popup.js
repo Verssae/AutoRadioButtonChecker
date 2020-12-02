@@ -2,33 +2,39 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   let save = document.getElementById("save")
+  console.log("save")
+  console.log(save)
   save.addEventListener("click", function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, { greeting: "save" }, function (response) {
         console.log("responded")
-        showTable()
+        // showTable()
+        window.location.reload()
       })
-      
+
     })
   })
 
   function removePair(url) {
 
-    chrome.storage.sync.get("pairs", ({ pairs }) => {
+    chrome.storage.local.get("pairs", ({ pairs }) => {
       if (!pairs) {
-        showTable()
+        // showTable()
+        window.location.reload()
         return
       }
-      chrome.storage.sync.set(
+      chrome.storage.local.set(
         {
           pairs: pairs.filter(pair => pair.url != url)
         },
         () => {
-          showTable()
+          // showTable()
+          window.location.reload()
         }
       )
     })
   }
+
 
   function showTable() {
     let tbox = document.getElementById("tbox")
@@ -46,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tr.appendChild(th2)
     tr.appendChild(th3)
     list.appendChild(tr)
-    chrome.storage.sync.get("pairs", ({ pairs }) => {
+    chrome.storage.local.get("pairs", ({ pairs }) => {
       if (!pairs) {
         tbox.appendChild(list)
         return
@@ -73,6 +79,26 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
+  
+
+  function localizeHtmlPage() {
+    //Localize by replacing __MSG_***__ meta tags
+    var objects = document.getElementsByTagName('html');
+    for (var j = 0; j < objects.length; j++) {
+      var obj = objects[j];
+
+      var valStrH = obj.innerHTML.toString();
+      var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
+        return v1 ? chrome.i18n.getMessage(v1) : "";
+      });
+
+      if (valNewH != valStrH) {
+        obj.innerHTML = valNewH;
+      }
+    }
+  }
+
+  localizeHtmlPage();
   showTable()
 
 })

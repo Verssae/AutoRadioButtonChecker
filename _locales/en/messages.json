@@ -1,0 +1,28 @@
+{
+  "appName": {
+    "message": "Auto Radio Button Checker",
+    "description": "There is no need to press every radio button individually"
+  },
+  "appDesc": {
+    "message": "Whenever you access a web page, the radio buttons are checked as you set.",
+    "description": "Check and save the radio buttons on the desired web page. Buttons will be checked on every visit."
+  },
+  "usage": {
+    "message" : "Usage"
+  },
+  "database" : {
+    "message" : "Database"
+  },
+  "li1" : {
+    "message" : "Checks all the radio buttons."
+  },
+  "li2" : {
+    "message" : "Click 'Save' button, then URL and buttons are saved."
+  },
+  "li3" : {
+    "message" : "If the URL of an website you visit contains below URL, buttons will checked."
+  },
+  "save" : {
+    "message" : "Save"
+  }
+}
