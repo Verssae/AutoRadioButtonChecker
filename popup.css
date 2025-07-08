@@ -1,65 +1,371 @@
+/* 전체 레이아웃 */
 body {
-    background-color: rgb(40, 174, 207);
-    min-width: 300px;
-    margin: 0px;
-    padding: 5px;
-    border: 3px solid black;
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    min-height: 480px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ffffff;
+    color: #333333;
+    overflow-x: hidden;
+}
+
+/* 헤더 */
+header {
+    background: #f8f9fa;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
+    margin: 0;
+    padding: 20px 20px 16px 20px;
     text-align: center;
-    margin-top: 3px;
-    margin-bottom: 3px;
-
+    color: #495057;
+    font-size: 1.4em;
+    font-weight: 600;
 }
 
+h1::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* 메인 컨테이너 */
+main {
+    padding: 0;
+    margin: 0;
+}
+
+/* 섹션 컨테이너 */
+section {
+    margin: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+section:hover {
+    background: #f8f9fa;
+}
+
+/* 섹션 헤더 */
 h2 {
-    margin-bottom: 3px;
+    margin: 0;
+    padding: 16px 20px 12px 20px;
+    background: #f8f9fa;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
 }
 
-table, td, th {
-    border: 3px solid black;
+h2::before {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+/* 사용법 섹션 아이콘 */
+.usage-section h2::before {
+    content: "📋";
+}
+
+/* 데이터베이스 섹션 아이콘 */
+.database-section h2::before {
+    content: "💾";
+}
+
+/* 리스트 스타일 */
+ol {
+    margin: 0;
+    padding: 20px 20px 16px 40px;
+    background: #ffffff;
+    border: none;
+    line-height: 1.6;
+}
+
+ol li {
+    margin-bottom: 8px;
+    color: #6c757d;
+    font-weight: 500;
+    position: relative;
+    padding-left: 5px;
+}
+
+ol li:last-child {
+    margin-bottom: 0;
+}
+
+ol li::marker {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* 테이블 컨테이너 */
+#tbox {
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    max-height: 180px;
+    overflow-y: auto;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
     border-collapse: collapse;
+    border: 1px solid #e9ecef;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-    background-color: aqua;
+th {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85em;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e9ecef;
 }
 
+th:first-child {
+    padding-left: 18px;
+}
 
+th:last-child {
+    padding-right: 18px;
+    text-align: center;
+}
+
+td {
+    padding: 12px 15px;
+    border: none;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 0.9em;
+    vertical-align: middle;
+    color: #495057;
+}
+
+td:first-child {
+    padding-left: 18px;
+}
+
+td:last-child {
+    padding-right: 18px;
+    text-align: center;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+tr:hover {
+    background: #e9ecef;
+}
+
+/* URL 셀 스타일 */
+td:first-child {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.75em;
+    color: #6c757d;
+    max-width: 160px;
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+/* 체크 셀 스타일 */
+td:nth-child(2) {
+    font-weight: 600;
+    color: #007bff;
+    text-align: center;
+    font-size: 0.85em;
+    padding: 12px 8px;
+}
+
+/* 버튼 컨테이너 */
+#bbox {
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    border-top: 1px solid #e9ecef;
+}
+
+/* 저장 버튼 */
 #bbox > button {
     width: 100%;
-    border: 3px solid black;
-    border-radius: 30px;
+    padding: 14px 20px;
+    background: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.0em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+    letter-spacing: 0.3px;
 }
 
-button {
-    background-color: white;
-    border-radius: 100%;
-    font-weight: bold;
+#bbox > button::before {
+    content: "💾 ";
+    margin-right: 8px;
+    font-size: 1.0em;
 }
 
-#bbox {
-    margin: auto;
-    width: 40%;
+#bbox > button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
-#tbox {
-    margin-bottom: 5px;
-    background-color: #fff;
+#bbox > button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 }
 
-ol {
-    border: 3px solid black;
-    margin-top: 0px;
-    margin-bottom: 3px;
-    background-color: #fff;
+/* 삭제 버튼 */
+button[style*="background: #f44336"] {
+    background: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    min-width: 30px !important;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2) !important;
 }
 
-ol > li {
-    font-weight: bold;
+button[style*="background: #f44336"]:hover {
+    background: #c82333 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3) !important;
 }
 
-footer {
-    text-align: right;
+button[style*="background: #f44336"]:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2) !important;
+}
+
+/* 스크롤바 커스터마이징 */
+#tbox::-webkit-scrollbar {
+    width: 8px;
+}
+
+#tbox::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+#tbox::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 4px;
+}
+
+#tbox::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+/* 빈 테이블 메시지 */
+table:empty::after {
+    content: "저장된 설정이 없습니다";
+    display: block;
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* 로딩 애니메이션 */
+.loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f8f9fa;
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 6px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 420px) {
+    body {
+        width: 100vw;
+        min-width: 320px;
+    }
+    
+    h1 {
+        font-size: 1.3em;
+        padding: 18px 15px 14px 15px;
+    }
+    
+    #bbox, #tbox, ol {
+        padding: 15px;
+    }
+    
+    h2 {
+        padding: 14px 15px 10px 15px;
+    }
+    
+    ol {
+        padding: 18px 15px 14px 30px;
+    }
+}
+
+/* 접근성 개선 */
+button:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* 애니메이션 */
+section, button, tr {
+    transition: all 0.2s ease;
+}
+
+/* 성공 메시지 (필요 시 사용) */
+.success-message {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

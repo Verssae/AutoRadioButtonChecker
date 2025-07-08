@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Radio Button Checker - 테스트 페이지</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .radio-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .radio-group h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .radio-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-option:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            cursor: pointer;
+            font-weight: 500;
+            color: #333;
+            flex-grow: 1;
+        }
+        
+        .radio-option:has(input:checked) {
+            border-color: #667eea;
+            background: #e8f0fe;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .instructions h2 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            color: #856404;
+            font-weight: 500;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        @media (max-width: 768px) {
+            .radio-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Auto Radio Button Checker</h1>
+            <p>확장프로그램 테스트 페이지</p>
+        </div>
+        
+        <div class="content">
+            <div class="instructions">
+                <h2>📋 테스트 방법</h2>
+                <ol>
+                    <li>원하는 라디오 버튼들을 선택하세요</li>
+                    <li>Auto Radio Button Checker 확장프로그램 아이콘을 클릭하세요</li>
+                    <li>팝업에서 "Save" 버튼을 클릭하세요</li>
+                    <li>페이지를 새로고침하여 자동으로 선택되는지 확인하세요</li>
+                </ol>
+            </div>
+            
+            <div class="radio-group">
+                <h3>🍕 좋아하는 음식</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="pizza" name="food" value="pizza">
+                        <label for="pizza">피자</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="chicken" name="food" value="chicken">
+                        <label for="chicken">치킨</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="hamburger" name="food" value="hamburger">
+                        <label for="hamburger">햄버거</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="sushi" name="food" value="sushi">
+                        <label for="sushi">초밥</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="pasta" name="food" value="pasta">
+                        <label for="pasta">파스타</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="korean" name="food" value="korean">
+                        <label for="korean">한식</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>🎨 선호하는 색상</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="red" name="color" value="red">
+                        <label for="red">빨간색</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="blue" name="color" value="blue">
+                        <label for="blue">파란색</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="green" name="color" value="green">
+                        <label for="green">초록색</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="yellow" name="color" value="yellow">
+                        <label for="yellow">노란색</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="purple" name="color" value="purple">
+                        <label for="purple">보라색</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>⚽ 좋아하는 스포츠</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="soccer" name="sport" value="soccer">
+                        <label for="soccer">축구</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="baseball" name="sport" value="baseball">
+                        <label for="baseball">야구</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="basketball" name="sport" value="basketball">
+                        <label for="basketball">농구</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="tennis" name="sport" value="tennis">
+                        <label for="tennis">테니스</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="swimming" name="sport" value="swimming">
+                        <label for="swimming">수영</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="golf" name="sport" value="golf">
+                        <label for="golf">골프</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>🎵 선호하는 음악 장르</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="kpop" name="music" value="kpop">
+                        <label for="kpop">K-POP</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="jazz" name="music" value="jazz">
+                        <label for="jazz">재즈</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="rock" name="music" value="rock">
+                        <label for="rock">록</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="classical" name="music" value="classical">
+                        <label for="classical">클래식</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="hiphop" name="music" value="hiphop">
+                        <label for="hiphop">힙합</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>📱 선호하는 운영체제</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="windows" name="os" value="windows">
+                        <label for="windows">Windows</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="macos" name="os" value="macos">
+                        <label for="macos">macOS</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="linux" name="os" value="linux">
+                        <label for="linux">Linux</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="android" name="os" value="android">
+                        <label for="android">Android</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="ios" name="os" value="ios">
+                        <label for="ios">iOS</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>☕ 선호하는 음료</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="coffee" name="drink" value="coffee">
+                        <label for="coffee">커피</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="tea" name="drink" value="tea">
+                        <label for="tea">차</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="juice" name="drink" value="juice">
+                        <label for="juice">주스</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="water" name="drink" value="water">
+                        <label for="water">물</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="soda" name="drink" value="soda">
+                        <label for="soda">탄산음료</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>🏖️ 선호하는 계절</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="spring" name="season" value="spring">
+                        <label for="spring">봄</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="summer" name="season" value="summer">
+                        <label for="summer">여름</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="autumn" name="season" value="autumn">
+                        <label for="autumn">가을</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="winter" name="season" value="winter">
+                        <label for="winter">겨울</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <h3>🎬 선호하는 영화 장르</h3>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="action" name="movie" value="action">
+                        <label for="action">액션</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="comedy" name="movie" value="comedy">
+                        <label for="comedy">코미디</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="drama" name="movie" value="drama">
+                        <label for="drama">드라마</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="horror" name="movie" value="horror">
+                        <label for="horror">호러</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="romance" name="movie" value="romance">
+                        <label for="romance">로맨스</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="scifi" name="movie" value="scifi">
+                        <label for="scifi">SF</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Auto Radio Button Checker 확장프로그램 테스트 페이지 | 다양한 라디오 버튼을 선택하고 확장프로그램을 테스트해보세요!</p>
+        </div>
+    </div>
+    
+    <script>
+        // 페이지 로드 시 현재 선택된 라디오 버튼 표시
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Auto Radio Button Checker 테스트 페이지가 로드되었습니다!');
+            
+            // 모든 라디오 버튼에 이벤트 리스너 추가
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    console.log(`선택됨: ${this.name} = ${this.value}`);
+                });
+            });
+            
+            // 현재 선택된 라디오 버튼 그룹 표시
+            const radioGroups = {};
+            radioButtons.forEach(radio => {
+                if (!radioGroups[radio.name]) {
+                    radioGroups[radio.name] = [];
+                }
+                radioGroups[radio.name].push(radio);
+            });
+            
+            console.log('발견된 라디오 버튼 그룹:', Object.keys(radioGroups));
+        });
+    </script>
+</body>
+</html> 

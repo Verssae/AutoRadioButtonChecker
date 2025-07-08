@@ -24,5 +24,20 @@
   },
   "save" : {
     "message" : "저장"
+  },
+  "headerUrl" : {
+    "message" : "URL"
+  },
+  "headerChecks" : {
+    "message" : "체크"
+  },
+  "headerDel" : {
+    "message" : "삭제"
+  },
+  "deleteButton" : {
+    "message" : "X"
+  },
+  "noSelection" : {
+    "message" : "X"
   }
 }
